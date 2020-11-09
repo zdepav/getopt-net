@@ -11,8 +11,18 @@ namespace GetOptNet.Tests {
     [TestClass]
     public class GetOptTests {
 
+        [TestMethod, ExpectedException(typeof(ArgumentNullException)]
+        public void Parse_NullOptionsTest() {
+            GetOpt.Parse(Array.Empty<string>();
+        }
+
         [TestMethod]
-        public void ParseTest() {
+        public void Parse_NullArgsTest() {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void Parse_InvalidOptionsTest() {
             Assert.Fail();
         }
     }

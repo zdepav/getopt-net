@@ -34,7 +34,10 @@ namespace GetOptNet {
             if (!optionsDefinitionRegex.IsMatch(options)) {
                 throw new FormatException("Options are not in a valid format.");
             }
-            var (shortOptions, longOptions) = ParseOptions(options, singleDashLongOptions);
+            if (args.Length == 0) {
+                return Array.Empty<string>();
+            }
+            var (shortOpts, longOpts, requiredOpts) = ParseOptions(options, singleDashLongOptions);
 
 
 
