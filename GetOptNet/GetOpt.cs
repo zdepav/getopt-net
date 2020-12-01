@@ -255,9 +255,6 @@ namespace GetOptNet {
             if (options is null) {
                 throw new ArgumentNullException(nameof(options));
             }
-            if (args.Length == 0) {
-                return new ParsedArgs(new Dictionary<string, object?>(), Array.Empty<string>());
-            }
             var (allOpts, requiredOpts, shortOpts, longOpts) =
                 ParseOptions(options, singleDashLongOptions, autoAddHelpAndVersionOptions);
 
@@ -600,8 +597,8 @@ namespace GetOptNet {
                     'd' => Option.OptionValueType.Directory,
                     's' => Option.OptionValueType.String,
                     't' => Option.OptionValueType.DateTime,
-                    // should not be possible thanks to regex check
-                    _ => throw new FormatException()
+                    // default type
+                    _ => Option.OptionValueType.String
                 };
             } else {
                 // default type
