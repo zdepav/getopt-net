@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Parser = System.Func<string, string, object?>;
+using Parsers = System.Collections.Generic.Dictionary<string, System.Func<string, string, object?>>;
 
 namespace GetOptNet {
 
@@ -83,16 +84,17 @@ namespace GetOptNet {
         }
 
         private static readonly Regex
-            optionsDefinitionRegex = new Regex(
+            optionsDefinitionRegex = new(
                 @"^[a-z0-9]+(?:-[a-z0-9]+)*(?:\|[a-z0-9]+(?:-[a-z0-9]+)*)*" +
-                @"(?<modifier>:[isfdnt]?!\+|:[isfdnt]?\+?!?|!:[isfdnt]?\+|!\+?(?::[isfdnt]?)?|\+:[isfdnt]?!|\+!?(?::[isfdnt]?)?)?$",
+                @"(?<modifier>:[isfdnt]?!\+|:[isfdnt]?\+?!?|!:[isfdnt]?\+|!\+?(?::[isfdnt]?)?|\+:" +
+                @"[isfdnt]?!|\+!?(?::[isfdnt]?)?)?$",
                 RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant
             ),
-            shortOptionRegex = new Regex(
+            shortOptionRegex = new(
                 @"^-(?<noValueNames>[a-z0-9]*)(?<lastName>[a-z0-9])(?:=(?<value>.*))?$",
                 RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant
             ),
-            longOptionRegex = new Regex(
+            longOptionRegex = new(
                 @"^(?<fullName>-+(?<name>[a-z0-9]+(?:-[a-z0-9]+)*))(?:=(?<value>.*))?$",
                 RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant
             );
@@ -233,7 +235,7 @@ namespace GetOptNet {
         ///     [&quot;file&quot;] = (_, path) =>
         ///         File.Exists(path)
         ///             ? Path.GetFullPath(path)
-        ///             : throw new FileNotFoundException($&quot;File \&quot;{path}\&quot; not found.&quot;)
+        ///             : throw new FileNotFoundException($&quot;File not found.&quot;)
         /// };
         /// var parsedArgs = GetOpt.Parse(args, &quot;file|f:f&quot;, parsers: parsers);
         /// </code></example>
@@ -247,7 +249,7 @@ namespace GetOptNet {
             bool singleDashLongOptions = false,
             bool valuesAfterOptions = false,
             bool includeUnusedOptions = false,
-            Dictionary<string, Parser>? parsers = null
+            Parsers? parsers = null
         ) {
             if (args is null) {
                 throw new ArgumentNullException(nameof(args));
@@ -379,7 +381,7 @@ namespace GetOptNet {
         /// No option can be repeated, option values can only be specified in the form -o=value (or
         /// --option=value).
         /// </remarks>
-        /// <seealso cref="Parse(string[],string,bool,bool,bool,bool,bool,System.Collections.Generic.Dictionary{string,System.Func{string,string,object?}}?)"/>
+        /// <seealso cref="Parse(string[],string,bool,bool,bool,bool,bool,Parsers?)"/>
         /// <seealso cref="ParsedArgs"/>
         public static ParsedArgs Parse(
             string[] args,
@@ -463,7 +465,7 @@ namespace GetOptNet {
         }
 
         private static Dictionary<string, object?> ProcessOptionValues(
-            Dictionary<string, Parser>? parsers,
+            Parsers? parsers,
             Dictionary<string, Option> parsedOpts
         ) {
             var retOpts = new Dictionary<string, object?>();
@@ -611,11 +613,11 @@ namespace GetOptNet {
             List<Option> requiredOptions,
             Dictionary<char, Option> shortOptions,
             Dictionary<string, Option> longOptions
-        ) ParseOptions(
-            string options,
-            bool singleDashLongOptions,
-            bool autoAddHelpAndVersionOptions
-        ) {
+            ) ParseOptions(
+                string options,
+                bool singleDashLongOptions,
+                bool autoAddHelpAndVersionOptions
+            ) {
             var allOptions = new List<Option>();
             var requiredOptions = new List<Option>();
             var shortOptions = new Dictionary<char, Option>();

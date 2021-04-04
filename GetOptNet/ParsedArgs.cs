@@ -2,19 +2,21 @@
 using System.Linq;
 using OptionTuple = System.ValueTuple<string, object?>;
 using Options = System.Collections.Generic.IDictionary<string, object?>;
+using Parsers = System.Collections.Generic.Dictionary<string, System.Func<string, string, object?>>;
 
 namespace GetOptNet {
 
     public static partial class GetOpt {
 
         /// <summary>
-        /// Container for options and values extracted by <see cref="GetOpt.Parse"/>.
+        /// Container for options and values extracted by
+        /// <see cref="Parse(string[],string,bool,bool,bool,bool,bool,Parsers?)"/>.
         /// </summary>
         public readonly struct ParsedArgs {
 
             /// <summary>
             /// Dictionary mapping option names to values. For details about value types see
-            /// <see cref="GetOpt.Parse"/>.
+            /// <see cref="Parse(string[],string,bool,bool,bool,bool,bool,Parsers?)"/>.
             /// </summary>
             public readonly Options Options;
 
