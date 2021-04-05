@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <PackageId>GetOptNet</PackageId>
+    <PackageId>NetGetOpt</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Zdeněk Pavlátka</Authors>
     <Product>GetOptNet</Product>
