@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -210,34 +210,36 @@ namespace GetOptNet {
         /// </exception>
         /// <para><b>Remarks</b></para>
         /// <remarks>
-        /// Options string can not contain any whitespace, only ASCII characters are supported.<br/>
-        /// Options without a value modifier have <see cref="bool"/> type, with true as their value.
+        /// - Options string can not contain any whitespace, only ASCII characters are supported.
         /// <br/>
-        /// Repeatable options without a value modifier have <see cref="int"/> type, with number of
-        /// occurences as their value.
+        /// - Options without a value modifier have <see cref="bool"/> type, with true as their
+        /// value.<br/>
+        /// - Repeatable options without a value modifier have <see cref="int"/> type, with number
+        /// of occurences as their value.<br/>
+        /// - Repeatable options with a value modifier return array of values.
         /// </remarks>
         /// <para><b>Examples</b></para>
         /// <example><code>
         /// // Simple short options example
         /// 
-        /// var parsedArgs = GetOpt.Parse(args, &quot;n,e,E&quot;);
+        /// var parsedArgs = GetOpt.Parse(args, "n,e,E");
         /// </code></example>
         /// <example><code>
         /// // Multiple names and typed value modifier example
         /// 
-        /// var optionsString = &quot;date|d:s,file|f:f,reference|r:f,set|s,utc|universal|u&quot;;
+        /// var optionsString = "date|d:s,file|f:f,reference|r:f,set|s,utc|universal|u";
         /// var parsedArgs = GetOpt.Parse(args, optionsString);
         /// </code></example>
         /// <example><code>
         /// // Custom parser example
         /// 
         /// var parsers = new Dictionary&lt;string, Func&lt;string, string, object?&gt;&gt; {
-        ///     [&quot;file&quot;] = (_, path) =>
+        ///     ["file"] = (_, path) =>
         ///         File.Exists(path)
         ///             ? Path.GetFullPath(path)
-        ///             : throw new FileNotFoundException($&quot;File not found.&quot;)
+        ///             : throw new FileNotFoundException("File not found.")
         /// };
-        /// var parsedArgs = GetOpt.Parse(args, &quot;file|f:f&quot;, parsers: parsers);
+        /// var parsedArgs = GetOpt.Parse(args, "file|f:f", parsers: parsers);
         /// </code></example>
         /// <seealso cref="Parse(string[],bool,bool)"/>
         /// <seealso cref="ParsedArgs"/>

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>GetOptNet</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Zdeněk Pavlátka</Authors>
+    <Product>GetOptNet</Product>
+    <Company />
+    <Copyright>Copyright © Zdeněk Pavlátka 2021</Copyright>
+    <PackageProjectUrl>https://github.com/zdepav/getopt-net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/zdepav/getopt-net</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>A simple library for parsing command line options inspired by posix getopt</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\GetOptNet\DefaultParsers.cs" Link="DefaultParsers.cs" />
+    <Compile Include="..\GetOptNet\GetOpt.cs" Link="GetOpt.cs" />
+    <Compile Include="..\GetOptNet\InvalidOptionsException.cs" Link="InvalidOptionsException.cs" />
+    <Compile Include="..\GetOptNet\ParsedArgs.cs" Link="ParsedArgs.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

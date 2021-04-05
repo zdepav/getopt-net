@@ -2,7 +2,8 @@ var NAVTREEINDEX0 =
 {
 "annotated.html":[1,0],
 "class_get_opt_net_1_1_get_opt.html":[1,0,0,0],
-"class_get_opt_net_1_1_get_opt.html#a9085ee3bbc1e8c9964072cccaa79cf3e":[1,0,0,0,1],
+"class_get_opt_net_1_1_get_opt.html#a2e48afe44b6eb7844ccf534a01891916":[1,0,0,0,2],
+"class_get_opt_net_1_1_get_opt.html#af713af8c545bc5a305fa0ddcad121c53":[1,0,0,0,1],
 "class_get_opt_net_1_1_invalid_options_exception.html":[1,0,0,1],
 "class_get_opt_net_1_1_invalid_options_exception.html#a2d460fdd26e7451e310be1c99c5ece48":[1,0,0,1,1],
 "class_get_opt_net_1_1_invalid_options_exception.html#a80e9a51a66bddfaf7b632e9301701451":[1,0,0,1,0],
